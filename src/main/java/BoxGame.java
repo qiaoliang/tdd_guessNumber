@@ -12,14 +12,17 @@ public class BoxGame {
 
     public String guess(String answer) {
         int fullyMatches = 0;
+        int partialMatches= 0;
         String[] answerByPlayers = answer.split("\\s");
         for (int i = 0; i < rightAnswerList.length; i++) {
-            if(rightAnswerList[i].equals(answerByPlayers[i]))
+            if(rightAnswerList[i].equals(answerByPlayers[i])) {
                 fullyMatches++;
+            }else if(rightAnswer.contains(answerByPlayers[i])){
+                partialMatches++;
+            }
         }
-        return fullyMatches+"A0B";
+        return fullyMatches+"A"+partialMatches+"B";
     }
-
 
     /**
      * 随机生成制定范围内的数字
