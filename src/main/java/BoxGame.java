@@ -17,7 +17,7 @@ public class BoxGame {
             if(rightAnswerList[i].equals(answerByPlayers[i]))
                 fullyMatches++;
         }
-        return String.valueOf(fullyMatches)+"A0B";
+        return fullyMatches+"A0B";
     }
 
 
