@@ -2,6 +2,24 @@ import java.util.Random;
 
 public class BoxGame {
 
+    private final String rightAnswer;
+    private final String[] rightAnswerList;
+
+    public BoxGame(String actualAnswer) {
+        this.rightAnswer = actualAnswer;
+        rightAnswerList = actualAnswer.split("\\s");
+    }
+
+    public String guess(String answer) {
+        int fullyMatches = 0;
+        String[] answerByPlayers = answer.split("\\s");
+        for (int i = 0; i < rightAnswerList.length; i++) {
+            if(rightAnswerList[i].equals(answerByPlayers[i]))
+                fullyMatches++;
+        }
+        return String.valueOf(fullyMatches)+"A0B";
+    }
+
 
     /**
      * 随机生成制定范围内的数字
@@ -53,11 +71,6 @@ public class BoxGame {
             }
         }
     }
-
-    /**
-     * 随机获取四个不相同的数字，数字范围0～9
-     * @return
-     */
     public static int[] getFourNumber(){
 
         int firstNum = getRandomExceptNum(0, 9, null);
