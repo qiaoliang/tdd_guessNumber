@@ -21,6 +21,7 @@ public class BoxGame {
                 partialMatches++;
             }
         }
+        Answer answerResult = new Answer(answer,fullyMatches+"A"+partialMatches+"B");
         return fullyMatches+"A"+partialMatches+"B";
     }
 }

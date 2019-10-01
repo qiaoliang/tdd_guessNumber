@@ -6,7 +6,7 @@ import java.util.Set;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class AwnserGeneratorTest {
+public class AnwserGeneratorTest {
     @Test
     public void
     should_generate_an_answer_of_four_numbers_and_those_numbers_is_different_with_each_other()  {
