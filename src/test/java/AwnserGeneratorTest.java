@@ -10,7 +10,7 @@ public class AwnserGeneratorTest {
     @Test
     public void
     should_generate_an_answer_of_four_numbers_and_those_numbers_is_different_with_each_other()  {
-        String result = new AnswerGenerator().createAnAnswer();
+        String result = new RandomAnswerGenerator().createAnAnswer();
         String[] answers = result.split("\\s");
         assertThat(answers.length,is(4));
         assertEachNumberIsdefferent(answers);

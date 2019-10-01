@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class AnswerGenerator {
+public class RandomAnswerGenerator {
 
     public static final String SPLITTER = " ";
 
