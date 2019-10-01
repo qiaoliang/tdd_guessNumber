@@ -77,7 +77,6 @@ public class BoxGameTest {
     })
     public void
     should_return_1A1B_when_some_number_are_fully_matched_and_other_numbers_are_partialy_matched(String para, String expected) throws Exception {
-        assertThat(boxGame.guess(para), endsWith(expected));
+        assertThat(boxGame.guess(para), is(expected));
     }
-
 }
