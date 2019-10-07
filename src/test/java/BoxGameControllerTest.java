@@ -30,6 +30,7 @@ public class BoxGameControllerTest {
         when(answerInput.input()).thenReturn(firsRightAnswer, nextFiveWrongAnswersGuessed);
 
         boxGameController.startGameWithinMaxRounds(6);
+
         assertThat(boxGameController.getGameRound(), is(1));
         assertThat(boxGameController.getGameResult(), is("player won!"));
     }
@@ -45,6 +46,7 @@ public class BoxGameControllerTest {
         when(answerInput.input()).thenReturn(firsWrongtAnswer, nextAnswersGuessed);
 
         boxGameController.startGameWithinMaxRounds(6);
+
         assertThat(boxGameController.getGameRound(), is(6));
         assertThat(boxGameController.getGameResult(), is("player lose!"));
     }
@@ -57,6 +59,7 @@ public class BoxGameControllerTest {
         when(answerInput.input()).thenReturn(firsWrongtAnswer, nextFiveAnswersGuessedWithLastRight);
 
         boxGameController.startGameWithinMaxRounds(6);
+
         assertThat(boxGameController.getGameRound(), is(6));
         assertThat(boxGameController.getGameResult(), is("player won!"));
     }
