@@ -6,7 +6,12 @@ public class Answer {
         this.playerAnswer = answer;
         this.result = result;
     }
-
+    public String answer(){
+        return playerAnswer;
+    }
+    public String result(){
+        return result;
+    }
     public String toString(){
         return playerAnswer + " " + result;
     }

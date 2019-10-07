@@ -1,9 +1,16 @@
+import java.util.ArrayList;
+
 public class BoxGameController {
 
     private AnswerInput answerInput;
     private RandomAnswerGenerator randomAnswerGenerator;
+    private ArrayList<Answer> answerHistory = new ArrayList<>();
     private String answer ="";
     private int round = 0;
+    private String tipsBeforeGame ="您可以开始了。\n" +
+            "请注意：您有六次猜测机会。\n" +
+            "       答案必须包含4个各不相同的数字，数字取值为 0~9之间，数字之间只能以空格分隔。\n" +
+            "       答案输入完以后，按回车键结束。";
 
     public BoxGameController(RandomAnswerGenerator randomAnswerGenerator, AnswerInput answerInput) {
         this.randomAnswerGenerator= randomAnswerGenerator;
@@ -17,13 +24,31 @@ public class BoxGameController {
     }
 
     public void startGameWithinMaxRounds(int maxRounds) {
-        BoxGame game = new BoxGame(randomAnswerGenerator.createAnAnswer());
+        String CorrectAnswer = randomAnswerGenerator.createAnAnswer();
+        BoxGame game = new BoxGame(CorrectAnswer);
         do {
             round++;
-            answer = game.guess(answerInput.input());
+            if(round==1)
+                System.out.println(tipsBeforeGame);
+            else {
+                printHistory();
+            }
+            String input = answerInput.input();
+            Answer result = game.guessIt(input);
+            answerHistory.add(result);
+            answer = result.result();
             if (answer.equals("4A0B"))
                 return;
         }while (round < maxRounds);
+    }
+
+    private void printHistory() {
+        System.out.println("一共猜测过 "+answerHistory.size()+" 次，结果如下：");
+        for (int i = 0; i < answerHistory.size(); i++) {
+            System.out.println("第 "+(i+1)+" 次: ");
+            Answer each = (Answer)answerHistory.get(i);
+            System.out.println("       输入为： "+each.answer()+"  结果为："+each.result());
+        }
     }
 
     public int getGameRound() {
