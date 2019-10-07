@@ -21,10 +21,15 @@ public class BoxGameController {
 
     public void startGameWithinMaxRounds(int maxRounds) {
         BoxGame game = new BoxGame(randomAnswerGenerator.createAnAnswer());
-        for (round = 0; round < maxRounds; round++) {
+        do {
+            round++;
             answer = game.guess(answerInput.input());
             if (answer.equals("4A0B"))
                 return;
-        }
+        }while (round < maxRounds);
+    }
+
+    public int getGameRound() {
+        return round;
     }
 }

@@ -7,17 +7,34 @@ import static org.mockito.Mockito.when;
 
 public class BoxGameControllerTest {
 
+    @Test public void
+    should_exit_as_soon_as_the_answer_is_right() throws Exception{
+        RandomAnswerGenerator randomAnswerGenerator = mock(RandomAnswerGenerator.class);
+        AnswerInput answerInput = mock(AnswerInput.class);
+        when(randomAnswerGenerator.createAnAnswer()).thenReturn("1 2 3 4");
+        String firsRightAnswer = "1 2 3 4";
+        String[] nextFiveWrongAnswersGuessed= new String[]{"5 7 8 9","8 7 6 9","4 3 2 1","5 1 3 4","7 1 3 4"};
+        when(answerInput.input()).thenReturn(firsRightAnswer,nextFiveWrongAnswersGuessed);
+
+        BoxGameController boxGameController = new BoxGameController(randomAnswerGenerator,answerInput);
+        boxGameController.startGameWithinMaxRounds(6);
+        assertThat(boxGameController.getGameRound(),is(1));
+        assertThat(boxGameController.getGameResult(),is("player won!"));
+    }
+
+
         @Test public void
         should_exit_after_guess_6_times_with_wrong_answers() throws Exception{
             RandomAnswerGenerator randomAnswerGenerator = mock(RandomAnswerGenerator.class);
             AnswerInput answerInput = mock(AnswerInput.class);
             when(randomAnswerGenerator.createAnAnswer()).thenReturn("1 2 3 4");
             String firsWrongtAnswer = "5 6 7 8";
-            String[] nextFiveWrongAnswersGuessed= new String[]{"5 7 8 9","8 7 6 9","4 3 2 1","5 1 3 4","7 1 3 4"};
-            when(answerInput.input()).thenReturn(firsWrongtAnswer,nextFiveWrongAnswersGuessed);
+            String[] nextAnswersGuessed= new String[]{"5 7 8 9","8 7 6 9","4 3 2 1","5 1 3 4","7 1 3 4","1 3 8 4"};
+            when(answerInput.input()).thenReturn(firsWrongtAnswer,nextAnswersGuessed);
 
         BoxGameController boxGameController = new BoxGameController(randomAnswerGenerator,answerInput);
         boxGameController.startGameWithinMaxRounds(6);
+        assertThat(boxGameController.getGameRound(),is(6));
         assertThat(boxGameController.getGameResult(),is("player lose!"));
     }
 
@@ -32,6 +49,7 @@ public class BoxGameControllerTest {
 
         BoxGameController boxGameController = new BoxGameController(randomAnswerGenerator,answerInput);
         boxGameController.startGameWithinMaxRounds(6);
+        assertThat(boxGameController.getGameRound(),is(6));
         assertThat(boxGameController.getGameResult(),is("player won!"));
     }
 
