@@ -1,10 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class BoxGameController {
 
-    private AnswerInput answerInput = null;
-    private RandomAnswerGenerator randomAnswerGenerator =null;
+    private AnswerInput answerInput;
+    private RandomAnswerGenerator randomAnswerGenerator;
     private String answer ="";
     private int round = 0;
 
