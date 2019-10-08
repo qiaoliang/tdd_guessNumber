@@ -15,42 +15,11 @@ public class BoxGameController {
         this.randomAnswerGenerator= randomAnswerGenerator;
         this.answerInput = answerInput;
     }
-    public String getGameResult() {
-        Answer lastAnswer = (Answer) answerHistory.get(answerHistory.size()-1);
-        if(lastAnswer.result().equals("4A0B"))
-            return "player won!";
-        else
-            return "player lose!";
-    }
 
-    public void startGameWithinMaxRounds(int maxRounds) {
+    public String startGameWithinMaxRounds(int maxRounds) {
         String CorrectAnswer = randomAnswerGenerator.createAnAnswer();
         BoxGame game = new BoxGame(CorrectAnswer, maxRounds, answerInput);
-        do {
-            round++;
-            if(round==1)
-                System.out.println(tipsBeforeGame);
-            else {
-                printHistory();
-            }
-            String input = answerInput.input();
-            Answer result = game.guess(input);
-            answerHistory.add(result);
-            if (result.result().equals("4A0B"))
-                return;
-        }while (round < maxRounds);
-    }
-
-    private void printHistory() {
-        System.out.println("一共猜测过 "+answerHistory.size()+" 次，结果如下：");
-        for (int i = 0; i < answerHistory.size(); i++) {
-            System.out.println("第 "+(i+1)+" 次: ");
-            Answer each = (Answer)answerHistory.get(i);
-            System.out.println("       输入为： "+each.answer()+"  结果为："+each.result());
-        }
-    }
-
-    public int getGameRound() {
-        return round;
+        game.start();
+        return game.getGameResult();
     }
 }
