@@ -7,12 +7,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class BoxGameTest {
 
-    private BoxGame boxGame = new BoxGame("1 7 8 9");
+    private BoxGame boxGame = new BoxGame("1 7 8 9", 1, null);
 
     @Test
     public void
     should_return_0A_when_no_number_is_fully_matched() throws Exception {
-        assertThat(boxGame.guess("2 3 4 5").startsWith("0A"), is(true));
+        assertThat(boxGame.guess("2 3 4 5").result().startsWith("0A"), is(true));
     }
 
     @ParameterizedTest
@@ -24,7 +24,7 @@ public class BoxGameTest {
     })
     public void
     should_return_1A_when_only_one_number_is_fully_matched(String para, String expected) throws Exception {
-        assertThat(boxGame.guess(para), startsWith(expected));
+        assertThat(boxGame.guess(para).result(), startsWith(expected));
     }
 
     @ParameterizedTest
@@ -36,7 +36,7 @@ public class BoxGameTest {
     })
     public void
     should_return_2A_when_two_numbers_are_fully_matched_by_number_and_position(String para, String expected) throws Exception {
-        assertThat(boxGame.guess(para), startsWith(expected));
+        assertThat(boxGame.guess(para).result(), startsWith(expected));
     }
     @ParameterizedTest
     @CsvSource({
@@ -45,7 +45,7 @@ public class BoxGameTest {
     })
     public void
     should_return_3A_when_three_numbers_are_fully_matched_by_number_and_position(String para, String expected) throws Exception {
-        assertThat(boxGame.guess(para), startsWith(expected));
+        assertThat(boxGame.guess(para).result(), startsWith(expected));
     }
 
     @ParameterizedTest
@@ -54,7 +54,7 @@ public class BoxGameTest {
     })
     public void
     should_return_4A_when_four_numbers_are_fully_matched_by_number_and_position(String para, String expected) throws Exception {
-        assertThat(boxGame.guess(para), startsWith(expected));
+        assertThat(boxGame.guess(para).result(), startsWith(expected));
     }
     @ParameterizedTest
     @CsvSource({
@@ -68,7 +68,7 @@ public class BoxGameTest {
     })
     public void
     should_endwith_XB_when_number_are_matched_partialy_by_only_number(String para, String expected) throws Exception {
-        assertThat(boxGame.guess(para), endsWith(expected));
+        assertThat(boxGame.guess(para).result(), endsWith(expected));
     }
     @ParameterizedTest
     @CsvSource({
@@ -77,6 +77,6 @@ public class BoxGameTest {
     })
     public void
     should_return_xAyB_format_when_some_number_are_fully_matched_and_other_numbers_are_partialy_matched(String para, String expected) throws Exception {
-        assertThat(boxGame.guess(para), is(expected));
+        assertThat(boxGame.guess(para).result(), is(expected));
     }
 }

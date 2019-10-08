@@ -5,7 +5,6 @@ public class BoxGameController {
     private AnswerInput answerInput;
     private RandomAnswerGenerator randomAnswerGenerator;
     private ArrayList<Answer> answerHistory = new ArrayList<>();
-    private String answer ="";
     private int round = 0;
     private String tipsBeforeGame ="您可以开始了。\n" +
             "请注意：您有六次猜测机会。\n" +
@@ -17,7 +16,8 @@ public class BoxGameController {
         this.answerInput = answerInput;
     }
     public String getGameResult() {
-        if(answer.equals("4A0B"))
+        Answer lastAnswer = (Answer) answerHistory.get(answerHistory.size()-1);
+        if(lastAnswer.result().equals("4A0B"))
             return "player won!";
         else
             return "player lose!";
@@ -25,7 +25,7 @@ public class BoxGameController {
 
     public void startGameWithinMaxRounds(int maxRounds) {
         String CorrectAnswer = randomAnswerGenerator.createAnAnswer();
-        BoxGame game = new BoxGame(CorrectAnswer);
+        BoxGame game = new BoxGame(CorrectAnswer, maxRounds, answerInput);
         do {
             round++;
             if(round==1)
@@ -34,10 +34,9 @@ public class BoxGameController {
                 printHistory();
             }
             String input = answerInput.input();
-            Answer result = game.guessIt(input);
+            Answer result = game.guess(input);
             answerHistory.add(result);
-            answer = result.result();
-            if (answer.equals("4A0B"))
+            if (result.result().equals("4A0B"))
                 return;
         }while (round < maxRounds);
     }
