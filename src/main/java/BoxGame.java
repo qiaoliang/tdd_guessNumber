@@ -44,10 +44,15 @@ public class BoxGame {
             String input = answerInputer.input();
             Answer result = guess(input);
             answerHistory.add(result);
-            if (result.result().equals("4A0B"))
+            if (isCorrectAnswer(result))
                 return;
         }
     }
+
+    private boolean isCorrectAnswer(Answer result) {
+        return result.result().equals("4A0B");
+    }
+
     private void printHistory() {
         System.out.println("一共猜测过 "+answerHistory.size()+" 次，结果如下：");
         for (int i = 0; i < answerHistory.size(); i++) {
@@ -62,8 +67,8 @@ public class BoxGame {
     }
 
     public String getGameResult() {
-        Answer lastAnswer = (Answer) answerHistory.get(answerHistory.size()-1);
-        if(lastAnswer.result().equals("4A0B"))
+        Answer lastAnswer = answerHistory.get(answerHistory.size()-1);
+        if(isCorrectAnswer(lastAnswer))
             return "player won!";
         else
             return "player lose!";

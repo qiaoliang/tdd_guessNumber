@@ -8,15 +8,16 @@ public class BoxGameController {
         this.answerInput = answerInput;
     }
 
-    public String startGameWithinMaxRounds(int maxRounds) {
-        String CorrectAnswer = randomAnswerGenerator.createAnAnswer();
+    public void startGameWithinMaxRounds(int maxRounds) {
+        String CorrectAnswer = randomAnswerGenerator.createAnAnswerString();
         BoxGame game = new BoxGame(CorrectAnswer, maxRounds, answerInput);
         game.start();
-        return game.getGameResult();
+        System.out.println(game.getGameResult());
     }
 
     public static void main(String[] args) {
         BoxGameController controller = new BoxGameController(new RandomAnswerGenerator(),new ConsoleInput());
-        controller.startGameWithinMaxRounds(2);
+        controller.startGameWithinMaxRounds(6);
     }
+
 }
