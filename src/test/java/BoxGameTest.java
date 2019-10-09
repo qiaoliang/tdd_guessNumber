@@ -6,12 +6,10 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.regex.Matcher;
 
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -151,7 +149,7 @@ public class BoxGameTest {
 
         boxGame.start();
 
-        assertThat(boxGame.getGameRound(), is(1));
+        assertThat(boxGame.getGameRoundAfterGameOver(), is(1));
         assertThat(boxGame.getGameResult(), is("player won!"));
     }
     @Test
@@ -165,7 +163,7 @@ public class BoxGameTest {
 
         boxGame.start();
 
-        assertThat(boxGame.getGameRound(), is(6));
+        assertThat(boxGame.getGameRoundAfterGameOver(), is(6));
         assertThat(boxGame.getGameResult(), is("player lose!"));
     }
 
@@ -178,7 +176,7 @@ public class BoxGameTest {
 
         boxGame.start();
 
-        assertThat(boxGame.getGameRound(), is(6));
+        assertThat(boxGame.getGameRoundAfterGameOver(), is(6));
         assertThat(boxGame.getGameResult(), is("player won!"));
     }
 }

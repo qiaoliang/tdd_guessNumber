@@ -7,9 +7,7 @@ public class BoxGame {
     private final AnswerInput answerInputer;
     private final int maxRound;
     private ArrayList <Answer> answerHistory = new ArrayList<>();
-
     private String tipsBeforeGame = null;
-    private int round;
 
     public BoxGame(String actualAnswer, int maxRound, AnswerInput answerInputer) {
         this.rightAnswer = actualAnswer;
@@ -36,9 +34,9 @@ public class BoxGame {
         return new Answer(answer,fullyMatches+"A"+partialMatches+"B");
     }
     public void start(){
-        do {
-            round++;
-            if(round ==1)
+
+        for (int round = 0; round < maxRound; round++) {
+            if(answerHistory.size()==0)
                 System.out.println(tipsBeforeGame);
             else {
                 printHistory();
@@ -48,8 +46,7 @@ public class BoxGame {
             answerHistory.add(result);
             if (result.result().equals("4A0B"))
                 return;
-        }while (round < maxRound);
-
+        }
     }
     private void printHistory() {
         System.out.println("一共猜测过 "+answerHistory.size()+" 次，结果如下：");
@@ -60,7 +57,7 @@ public class BoxGame {
         }
     }
 
-    public int getGameRound() {
+    public int getGameRoundAfterGameOver() {
         return answerHistory.size();
     }
 
