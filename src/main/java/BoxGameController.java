@@ -9,7 +9,7 @@ public class BoxGameController {
     }
 
     public void startGameWithinMaxRounds(int maxRounds) {
-        String CorrectAnswer = randomAnswerGenerator.createAnAnswerString();
+        Answer CorrectAnswer = randomAnswerGenerator.CreateFinalAnswer();
         BoxGame game = new BoxGame(CorrectAnswer, maxRounds, answerInput);
         game.start();
         System.out.println(game.getGameResult());

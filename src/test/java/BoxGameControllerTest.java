@@ -33,7 +33,7 @@ public class BoxGameControllerTest {
         answerInput = mock(AnswerInput.class);
 
         boxGameController = new BoxGameController(randomAnswerGenerator, answerInput);
-        when(randomAnswerGenerator.createAnAnswerString()).thenReturn("1 2 3 4");
+        when(randomAnswerGenerator.CreateFinalAnswer()).thenReturn(new Answer("1 2 3 4","4A0B"));
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
 
