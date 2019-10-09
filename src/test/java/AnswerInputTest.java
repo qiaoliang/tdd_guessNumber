@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -5,13 +6,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AnswerInputTest {
 
     private AnswerInput inputs;
+
     @BeforeEach
     public void
     setup(){
@@ -22,9 +26,12 @@ public class AnswerInputTest {
             }
         };
     }
+
     @Test public void
     should_return_true_when_there_are_4_numbers_seperated_with_spaces() throws Exception{
         assertThat(inputs.validate("1 2 3 4"),is(true));
+        assertThat(inputs.validate("2 2 2 2"),is(true));
+        assertThat(inputs.validate("   2 2 2 2   "),is(false));
     }
     @ParameterizedTest
     @CsvSource({
@@ -38,8 +45,6 @@ public class AnswerInputTest {
     })
     public void
     should_return_false_when_input_is_not_valid( String para) throws Exception {
-
         assertThat(inputs.validate(para),is(false));
     }
-
 }

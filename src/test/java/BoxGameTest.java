@@ -27,7 +27,7 @@ public class BoxGameTest {
 
 
     @AfterEach
-    public void afterTestClass() {
+    public void tearDown() {
         System.setOut(originalOut);
         System.setErr(originalErr);
     }
