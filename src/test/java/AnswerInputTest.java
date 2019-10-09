@@ -26,12 +26,16 @@ public class AnswerInputTest {
             }
         };
     }
-
     @Test public void
+    should_return_input_correctly() throws Exception{
+        assertThat(inputs.input(),is("1 2 3 4"));
+    }
+    @Test
+    public void
     should_return_true_when_there_are_4_numbers_seperated_with_spaces() throws Exception{
         assertThat(inputs.validate("1 2 3 4"),is(true));
         assertThat(inputs.validate("2 2 2 2"),is(true));
-        assertThat(inputs.validate("   2 2 2 2   "),is(false));
+        assertThat(inputs.validate("   2 2 2 2  "),is(false));
     }
     @ParameterizedTest
     @CsvSource({

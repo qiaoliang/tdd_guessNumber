@@ -2,22 +2,29 @@ import java.util.ArrayList;
 
 public class BoxGame {
 
-    private final String rightAnswer;
+    private final Answer rightAnswer;
+    private final String rightAnswerString;
     private final String[] rightAnswerList;
     private final AnswerInput answerInputer;
     private final int maxRound;
     private ArrayList <Answer> answerHistory = new ArrayList<>();
-    private String tipsBeforeGame = null;
+    private final String tipsBeforeGame;
 
-    public BoxGame(String actualAnswer, int maxRound, AnswerInput answerInputer) {
+    public BoxGame(Answer actualAnswer, int maxRound, AnswerInput answerInputer) {
         this.rightAnswer = actualAnswer;
-        rightAnswerList = actualAnswer.split("\\s");
+        this.rightAnswerString = rightAnswer.answer();
+        rightAnswerList = rightAnswerString.split("\\s");
         this.answerInputer = answerInputer;
         this.maxRound = maxRound;
         tipsBeforeGame ="您可以开始了。\n" +
                 "请注意：您有"+ maxRound +"次猜测机会。\n" +
                 "       答案必须包含4个各不相同的数字，数字取值为 0~9之间，数字之间只能以空格分隔。\n" +
                 "       答案输入完以后，按回车键结束。";
+
+    }
+
+    public BoxGame(String rightAnswerString, int maxRound, AnswerInput answerInputer) {
+        this(new Answer(rightAnswerString,"4A0B"),maxRound,answerInputer);
     }
 
     public Answer guess(String answer) {
@@ -27,7 +34,7 @@ public class BoxGame {
         for (int i = 0; i < rightAnswerList.length; i++) {
             if(rightAnswerList[i].equals(answerByPlayers[i])) {
                 fullyMatches++;
-            }else if(rightAnswer.contains(answerByPlayers[i])){
+            }else if(rightAnswerString.contains(answerByPlayers[i])){
                 partialMatches++;
             }
         }
@@ -50,7 +57,7 @@ public class BoxGame {
     }
 
     private boolean isCorrectAnswer(Answer result) {
-        return result.result().equals("4A0B");
+        return result.toString().equals(rightAnswer.toString());
     }
 
     private void printHistory() {
